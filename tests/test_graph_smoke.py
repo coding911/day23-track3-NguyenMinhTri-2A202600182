@@ -9,6 +9,12 @@ from langgraph_agent_lab.persistence import build_checkpointer
 from langgraph_agent_lab.state import Route, Scenario, initial_state
 
 
+def test_build_sqlite_checkpointer(tmp_path):
+    db_path = tmp_path / "checkpoints.db"
+    checkpointer = build_checkpointer("sqlite", str(db_path))
+    assert checkpointer is not None
+
+
 @pytest.mark.parametrize(
     ("query", "expected_route"),
     [
